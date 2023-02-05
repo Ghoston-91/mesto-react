@@ -1,7 +1,7 @@
 import React from "react";
 
 function PopupWithForm (props) {
-  const { name, title, children, isOpen, Close, buttonText } = props;
+  const { onSubmit, name, isOpen, Close, title, children, buttonText} = props
 
   return (
     <div className={`modal modal_type_${name} ${ isOpen ? 'modal_active' : '' }`}>
@@ -12,9 +12,13 @@ function PopupWithForm (props) {
           onClick={Close} 
         />
         <h3 className="modal__title">{title}</h3>
-        <form className="modal__form" name={name} noValidate>
+        <form 
+        className="modal__form" 
+        name={name} 
+        onSubmit={onSubmit}
+        noValidate>
             {children}
-          <button type="submit" className="modal__save">{ buttonText || "Сохранить"}</button>
+            <button type="submit" className="modal__save">{ buttonText || "Сохранить"}</button>
         </form>
       </div>
     </div>

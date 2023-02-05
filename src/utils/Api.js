@@ -34,7 +34,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        about: data.job
+        about: data.about
       })
       
     })
@@ -70,22 +70,37 @@ class Api {
   }
 
   deleteLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: "DELETE",
       headers: this._headers
     })
     .then(this._checkError)
   }
 
+  changeLikeCardStatus(id, isLiked) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+        method: `${isLiked ? 'PUT' : 'DELETE'}`,
+        headers: this._headers
+    })
+        .then(this._checkError)
+}
+
   editAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: "PATCH",
         headers: this._headers,
         body: JSON.stringify({
-          avatar: data.src
+          avatar: data.avatar
         })
     })
     .then(this._checkError)    
+  }
+
+  getPromiseAll(){
+    return Promise.all([
+      this.getInfo(),
+      this.getCards()
+    ])
   }
 }
 
@@ -94,6 +109,6 @@ const apiConnect = new Api({
   headers: {
       authorization: "9c9b38b2-7369-4326-aac4-9ce480f1f0cd",
       "Content-Type": "application/json",
-  },
+  }
 });
 export default apiConnect;
