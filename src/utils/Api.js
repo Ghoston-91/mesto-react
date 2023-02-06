@@ -41,16 +41,27 @@ class Api {
     .then(this._checkError)
   }
 
-  createCard(cardData) {
+  createCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: cardData.name,
-        link: cardData.link
+        name: data.title,
+        link: data.link
       })
     })
     .then(this._checkError)
+  }
+
+  editAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+        method: "PATCH",
+        headers: this._headers,
+        body: JSON.stringify({
+          avatar: data
+        })
+    })
+    .then(this._checkError)    
   }
 
   deleteCard(id) {
@@ -83,22 +94,13 @@ class Api {
         headers: this._headers
     })
         .then(this._checkError)
-}
-
-  editAvatar(data) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-        method: "PATCH",
-        headers: this._headers,
-        body: JSON.stringify({
-          avatar: data.avatar
-        })
-    })
-    .then(this._checkError)    
   }
+
+
 
   getPromiseAll(){
     return Promise.all([
-      this.getInfo(),
+      this.getUserInfo(),
       this.getCards()
     ])
   }

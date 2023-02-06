@@ -13,11 +13,11 @@ function Main(props){
         <div 
           onClick={onEditAvatar} 
           className="profile__avatar" 
-          style={{backgroundImage: `url(${currentUser.avatar})`}}
+          style={{backgroundImage: `url(${currentUser?.avatar})`}}
         />
         <div className="profile__info">
           <div className="profile__group-title">
-            <h1 className="profile__name">{currentUser.name}</h1>
+            <h1 className="profile__name">{currentUser?.name}</h1>
             <button 
               onClick={onEditProfile} 
               aria-label="profile-edit" 
@@ -25,7 +25,7 @@ function Main(props){
               className="profile__edit"
             />
           </div>
-          <p className="profile__job">{currentUser.about}</p>
+          <p className="profile__job">{currentUser?.about}</p>
         </div>
         <button 
           onClick={onAddPlace} 

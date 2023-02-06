@@ -4,7 +4,7 @@ function PopupWithForm (props) {
   const { onSubmit, name, isOpen, Close, title, children, buttonText} = props
 
   return (
-    <div className={`modal modal_type_${name} ${ isOpen ? 'modal_active' : '' }`}>
+    <div className={`modal modal_${name} ${ isOpen ? 'modal_active' : '' }`}>
       <div className="modal__content modal__container">
         <button 
           type="button" 
